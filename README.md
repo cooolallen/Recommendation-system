@@ -4,9 +4,10 @@
 Recommendation system utilize the information between item-item, user-user and user-item. To express the relationship among those pairs, graph is a great tool. This project evaluate the difference between different graph structures and embedding methods. Also, we modify the metapath2vec and create another algorithm named semi-metapath2vec. We finally can produce the rank of items for each user and it achieve really good results.
 
 ## Implementation  
-<img src="./figures/flowchart.png" width="140%"/>  
-The implementation details are in the [report](https://ez2o.co/2WxmS).  
+<img src="./figures/flowchart.png" width="140%"/>   
 
+ *  The implementation details are in the [report](https://ez2o.co/2WxmS).
+ 
 ## Installation
  *  Download the dataset from [here](http://snap.stanford.edu/data/amazon-meta.html). Unzip it and put the 'amazon-meta.txt' in the corpus directory.
  *  For the first time, you can just run `make all` to do the preprocessing, toy example extract, build graph and test the embedding algorithm.
