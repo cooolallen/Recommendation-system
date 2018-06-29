@@ -11,26 +11,26 @@ The implementation details are in the
 ## Installation
  *  Download the dataset from [here](http://snap.stanford.edu/data/amazon-meta.html). Unzip it and put the 'amazon-meta.txt' in the corpus directory.
  *  For the first time, you can just run `make all` to do the preprocessing, toy example extract, build graph and test the embedding algorithm.
- *  For running different embedding method, you need to pay attention on different graph type (rebuild it by `make build_graph` if you need that).
+ *  For running different embedding method, you need to pay attention on different graph type (rebuild it by `make build_graph` if you need that).  
 
 You can also take a look at makefile to see some detail argument for each step. We provide some description below:  
-####1. preprocessing:  
-Preprocess the original dataset from txt. No arguments needed.
+#### 1. preprocessing:  
+Preprocess the original dataset from txt. No arguments needed.  
 
-####2. toy_exxtractor:  
+#### 2. toy_exxtractor:  
 Extract the toy dataset from original dataset.  
 Arguments:  
  -  user_num : the number of user you want to focus on  
- -  product_range : only extrac the user who rate number is in this range.  
+ -  product_range : only extrac the user who rate number is in this range.   
 
-####3. build_graph:
+#### 3. build_graph:  
 Building the graph from the toy_example.  
 Arguments:  
  -  graph_name : the name of output graph.  
  -  graph_type : 'w' for the graph with preference part in the graph, 'w/o' for the graph without preference part in the graph.  
- -  pref_type : if graph_type is 'w', 'dense' for the dense preference part, 'sparse' for the sparse preference part.
+ -  pref_type : if graph_type is 'w', 'dense' for the dense preference part, 'sparse' for the sparse preference part.  
 
-For other detail use instruction, please check the code and makefile.
+For other detail use instruction, please check the code and makefile.  
 
 ##Conclusions
  * Based on our experiments, comparing to the commonly used centroid graph, the four-partite graph improves the performance a lot.
