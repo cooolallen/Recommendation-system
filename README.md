@@ -5,8 +5,7 @@ Recommendation system utilize the information between item-item, user-user and u
 
 ## Implementation  
 <img src="./figures/flowchart.png" width="140%"/>  
-The implementation details are in the 
-[report](https://ez2o.co/2WxmS).
+The implementation details are in the [report](https://ez2o.co/2WxmS).  
 
 ## Installation
  *  Download the dataset from [here](http://snap.stanford.edu/data/amazon-meta.html). Unzip it and put the 'amazon-meta.txt' in the corpus directory.
