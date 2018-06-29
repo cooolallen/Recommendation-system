@@ -32,7 +32,7 @@ Arguments:
 
 For other detail use instruction, please check the code and makefile.  
 
-##Conclusions
+## Conclusions
  * Based on our experiments, comparing to the commonly used centroid graph, the four-partite graph improves the performance a lot.
  * For algorithm, although PPR has better performance on the small scale dataset, the memory bottleneck makes it a impractical method in reality. Semi-metapath2vec has higher scalability.
  * Due to data sparsity, most of the items in the subset we analyze are only connected to one single user. As a result, when only considering the relation between items, we get the best performance.
