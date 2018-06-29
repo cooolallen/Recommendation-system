@@ -1,4 +1,4 @@
-all: build_graph PPR semi
+all: preprocessing toy_extractor build_graph PPR
 
 preprocessing:
 	python ./src/preprocessing.py
@@ -15,15 +15,5 @@ semi:
 HIN:
 	python ./src/main.py --feature_type HIN --graph_name graph --epochs 10 --window 5 --stepInEachPath 5 --negative-samples 5 --graph_type w
 
-
 PPR:
 	python ./src/main.py --feature_type PPR --graph_name graph --maxIter 60 --tol 1e-6 --graph_type w
-	# -mkdir ./PPR_log
-	# chmod +777 ./src/PPR_evaluate.sh
-	# ./src/PPR_evaluate.sh
-
-std_mean:
-	python ./src/std_mean.py --graph_name graph100 --prefFileName user100_preference.txt --tagFileName user100_tags.txt
-
-# clean:
-

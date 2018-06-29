@@ -2,10 +2,7 @@ from os.path import join
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
-# from sklearn.linear_model import LinearRegression as LR
-# from sklearn.svm import SVR
 from collections import OrderedDict
-
 from metapath2vec.meta2vec import meta2vec
 from metapath2vec.meta2vecHIN import *
 from Utils.LR_helper import *
@@ -13,11 +10,8 @@ from PPR import *
 from HIN.train import train_neural_network
 from HIN.predict import predict
 
-
 def evaluation(G, df_pref, df_tag, df_table, feature_type, args):
-	clf = RandomForestRegressor(random_state=42, n_jobs=-1)
-	# clf = LR(n_jobs=-1)
-	# clf = SVR()
+	clf = RandomForestRegressor(random_state=42, n_jobs=-1)		# Can be changed with other regressor.
 
 	# def removed_edge(graph, df_pref, df_table, drop_pre_thr = 30, drop_user_rate = 0.3, drop_pre_rate = 0.3):
 	print("removing edges from graph")
@@ -27,7 +21,6 @@ def evaluation(G, df_pref, df_tag, df_table, feature_type, args):
 		if feature_type == 'PPR':
 			print("PPR feature generating")
 			user_feature, item_feature = PPR_feature_generator(G, args.tol, args.maxIter, 0.85, args.graph_type)
-			# user_feature, item_feature = np.zeros((10, 502)), np.zeros((36, 502))
 			print('user shape:', user_feature.shape, 'item shape:', item_feature.shape)
 			print("generating training data")
 			x_train, y_train, x_test, y_test = generate_data(user_feature, item_feature, G, removed_pre, df_pref, df_table, args.graph_type)
@@ -36,27 +29,20 @@ def evaluation(G, df_pref, df_tag, df_table, feature_type, args):
 
 			print("meta2vec feature generating")
 			user_feature, item_feature, _ = meta2vec(nodeById = G.NodeList, userNum = n[0], prodNum = n[2], args = args)
-			# user_feature, item_feature = np.zeros((10, 100)), np.zeros((376, 200))
 
 			print('user shape:', user_feature.shape, 'item shape:', item_feature.shape)
 			print("generating training data")
 			x_train, y_train, x_test, y_test = generate_data(user_feature, item_feature, G, removed_pre, df_pref, df_table, args.graph_type)		
 	
-
 		# manuipolation
 		x_train = manipulate(x_train)
-		# y_train = manipulate(y_train)
 		x_test = manipulate(x_test)
-		# y_test = manipulate(y_test)
-
 
 		print("training the model")
 		clf.fit(x_train, y_train)
 
 		print("predicting")
 		y_predict = clf.predict(x_test)
-
-
 
 	elif feature_type == 'HIN':
 		print("generating training data")
@@ -65,18 +51,14 @@ def evaluation(G, df_pref, df_tag, df_table, feature_type, args):
 		
 		print("Hin training data combinding")
 		total_x_train, total_y_train, val_x, val_y, total_x_test, total_y_test = hin_generate_data(user_feature, item_feature, 0.8, G, removed_pre, df_pref, df_table, args.graph_type)
-
-
-
 		train_neural_network(total_x_train, total_y_train, val_x, val_y)
-
 		y_predict = predict(total_x_test, total_y_test)
-
 
 	offset = 0
 	DCG = []
 	for item_per_user in item_num:
 		y_user = y_predict[offset:offset + item_per_user]							# extract user's data
+		
 		if args.feature_type == 'PPR' or args.feature_type == 'meta2vec':
 			if args.graph_type == 'w':
 				rate_user = y_test[0][offset:offset + item_per_user]

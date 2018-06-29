@@ -1,1 +1,2 @@
-put all the data here
+Download the data from [here](http://snap.stanford.edu/data/amazon-meta.html).
+unzip it and put the 'amazon-meta.txt' in this directory.
